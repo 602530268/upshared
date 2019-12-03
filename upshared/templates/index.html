@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>文件上传</h1>
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        {{ form.file }}
+        {% for error in form.file.errors %}
+            <span style="color:red;">{{ error }}</span>
+        {% endfor %}
+        {{ form.submit }}
+    </form>
+
+    {% for file in localFiles %}
+        <br>
+        - {{ file }}
+        <a href="{{ url_for('download_file', filename=file) }}">下载</a>
+        <a href="{{ url_for('delete_file', filename=file) }}">删除</a>
+    {% endfor %}
+</body>
+</html>
